@@ -38,15 +38,25 @@ var schema = mongoose.Schema({
 var blogdb = mongoose.model('blogdb', schema);
 //------------------------------------------------------
 //example
-blogdb.create({
-    title: "pet",
-    image: "https://i.imgur.com/8pTwPlXb.jpg",
-    body: "this dogs are so cute"
-});
+// blogdb.create({
+//     title: "pet",
+//     image: "https://i.imgur.com/8pTwPlXb.jpg",
+//     body: "this dogs are so cute"
+// });
 
 //RESTfull Routes
-app.get('/', (req, res) => {
-    
+app.get('/',(req,res)=>{
+    res.redirect('blogs')
+})
+
+app.get('/blogs', (req, res) => {
+    blogdb.find({})
+        .exec()
+        .then(function (blogs){
+            res.send(blogs);
+        }).catch(function(err){
+            res.render("error")
+        });      
 });
 
 //listen port assign

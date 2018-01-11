@@ -1,0 +1,12 @@
+
+                         -:Routes used:-
+###############################################################################
+    Index   /blog           get         blog list
+    New     /blog/new       get         blogform
+    Create  /blog/create    post        update db and redirect to /blog
+    Show    /blog/:Show     get         show specific blog
+    Edit    /blog/:id/Edit  get         editform
+    update  /blog/update    post        update perticular blog
+    destroy /blog/:id       get/delete  remove from db
+    error   /error          get         show error page
+###############################################################################
