@@ -5,6 +5,7 @@ var express = require('express'),
     path = require('path'),
     request = require('request'),
     mongoose = require('mongoose');
+
 //static to public directory
 app.use(express.static('public'));
 //set ejs as view engine
@@ -42,6 +43,9 @@ var blogdb = mongoose.model('blogdb', schema);
 //     title: "pet",
 //     image: "https://i.imgur.com/8pTwPlXb.jpg",
 //     body: "this dogs are so cute"
+//     created:
+//     oneh:{type:double, default:0}
+//     twoh:{tuype:double, default:0}
 // });
 
 //RESTfull Routes
@@ -53,11 +57,19 @@ app.get('/blogs', (req, res) => {
     blogdb.find({})
         .exec()
         .then(function (blogs){
-            res.send(blogs);
+            // res.send(blogs);
+            res.render("blog", {
+                blogs : blogs
+            })
         }).catch(function(err){
-            res.render("error")
-        });      
+            console.error(err);
+            res.render("error");
+        });   
 });
+
+app.get('/blogs/new', function(req,res){
+
+})
 
 //listen port assign
 app.listen('8080', () => {
