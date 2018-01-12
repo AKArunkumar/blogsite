@@ -50,8 +50,8 @@ var blogdb = mongoose.model('blogdb', schema);
 
 //RESTfull Routes
 app.get('/',(req,res)=>{
-    res.redirect('blogs')
-})
+    res.redirect('/blogs')
+}) 
 
 app.get('/blogs', (req, res) => {
     blogdb.find({})
@@ -67,10 +67,22 @@ app.get('/blogs', (req, res) => {
         });   
 });
 
-app.get('/blogs/new', function(req,res){
+app.get('/blogs/add', function(req,res){
+    res.render('new');
 
 })
 
+app.post('/blogs/new', (req,res)=>{
+    blogdb.create(req.body.blog, function(err,result){
+        if(err){
+            console.error(err);
+            res.redirect('/blogs');
+        }
+        console.log(result);
+        res.redirect('/blogs');
+
+    })
+});
 //listen port assign
 app.listen('8080', () => {
     console.log("Listening at port 8080");

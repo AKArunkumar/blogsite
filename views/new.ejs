@@ -1,10 +1,17 @@
 <% include partials/header %>
-<div class="ui raised segment">
-<form action="/new" method="post">
-    <input type="text" name=blog[title] placeholder="Title here">
-    <input type="text" name=blog[image] placeholder="Image here">
-    <input type="text" name=blog[body] placeholder="Body here">
-    <button>Post Blog</button>
-</form>
-</div>
-<% include partials/footer %>
+    <form class="ui form segment " action="/new" method="post">
+        <div class="field">
+            <label>Title</label>
+            <input type="text" name="blog[title]" placeholder="Title here">
+        </div>
+        <div class="field">
+            <label>Image Link</label>
+            <input type="text" name="blog[image]" placeholder="Image here">
+        </div>
+        <div class="field">
+            <label>Blog Content</label>
+            <input type="text" name="blog[body]" placeholder="Body here">
+        </div>
+        <button>Post Blog</button>
+    </form>
+    <% include partials/footer %>

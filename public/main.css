@@ -16,5 +16,14 @@ body{
 
 i.icon{
     color: white;
-    font-size: 2em;
+    font-size: 25px;;
 }
+ .ui.form{
+     margin-top: 10%;
+     margin-left: 25%;
+     margin-right: 25%;
+     margin-bottom: 10%;
+ }
+ .field {
+     margin-right: 25px;
+    }
