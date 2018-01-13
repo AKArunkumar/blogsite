@@ -1,18 +1,24 @@
 <% include partials/header %>
     <% blogs.forEach(function(blog){ %>
-        <div class="ui raised segment">
-            <p>
-                <h2>
-                    <%= blog.title %>
-                </h2>
-                <img src="<%= blog.image %>" alt="">
-                <p>
-                    <%= blog.created %>
-                </p>
-                <p>
-                    <%= blog.body %>
-                </p>
-            </p>
+        <div class="grid-3">
+            <a href="/blogs/<%= blog._id %>">
+                <div class="ui raised segment">
+                    <p>
+                        <h2 class="title">
+                            <%= blog.title %>
+                        </h2>
+                        <div class="blogimage">
+                            <img src="<%= blog.image %>" alt="">
+                        </div>
+                        <p>
+                            <%= blog.created.toDateString() %>
+                        </p>
+                        <p class="title">
+                            <%= blog.body %>
+                        </p>
+                    </p>
+                </div>
+            </a>
         </div>
         <%})%>
- <% include partials/footer %>
+            <% include partials/footer %>

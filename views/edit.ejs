@@ -1,17 +1,17 @@
 <% include partials/header %>
-    <form class="ui form segment " action="/blogs/new" method="post">
+    <form class="ui form segment " action="/blogs/<%= blog._id %>/edit" method="post">
         <div class="field">
             <h2>
-                <label>New Blog</label>
+                <label>Edit Blog</label>
             </h2>
         </div>
         <div class="field">
             <label>Title</label>
-            <input type="text" name="blog[title]" placeholder="Title here">
+            <input type="text" name="blog[title]" value="<%= blog.title %>" >
         </div>
         <div class="field">
             <label>Image Link</label>
-            <input type="text" name="blog[image]" placeholder="Image here">
+            <input type="text" name="blog[image]" value="<%= blog.image %>">
         </div>
         <div class="field">
             <label>Blog Content</label>

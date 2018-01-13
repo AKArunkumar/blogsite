@@ -1,5 +1,7 @@
+
 //require packages
 var express = require('express'),
+    expressSanitizer = require('express-sanitizer');
     app = express(),
     bodyParser = require('body-parser'),
     path = require('path'),
@@ -16,6 +18,8 @@ app.use(bodyParser.urlencoded({
     extended: true
 }))
 app.use(bodyParser.json());
+//app use in sanitizer
+app.use(expressSanitizer());
 
 
 //Mongodb setup 
@@ -58,6 +62,7 @@ app.get('/blogs', (req, res) => {
         .exec()
         .then(function (blogs){
             // res.send(blogs);
+            // console.log(blogs);
             res.render("blog", {
                 blogs : blogs
             })
@@ -73,16 +78,70 @@ app.get('/blogs/add', function(req,res){
 })
 
 app.post('/blogs/new', (req,res)=>{
+    req.body.blog.body = req.sanitize(req.body.blog.body);
     blogdb.create(req.body.blog, function(err,result){
         if(err){
             console.error(err);
             res.redirect('/blogs');
         }
-        console.log(result);
+        // console.log(result);
         res.redirect('/blogs');
-
     })
 });
+
+app.get('/blogs/:id', function(req,res){
+    let id = req.params.id;
+    blogdb.findById(id, function(err, result){
+        if(err){
+            console.error(err);
+            res.redirect("/blogs");
+        }
+        // console.log(result);
+        res.render("show", {
+            blog:result
+        })
+    })
+});
+
+app.get('/blogs/:id/delete', function(req,res){
+    let id = req.params.id;
+    blogdb.findByIdAndRemove(id).then(function(rem){
+        console.log(rem);
+        console.log("then");
+        res.redirect('/blogs');
+    }).catch(function(err){
+        console.error(err);
+        console.log('catch');
+        res.redirect("/blogs");        
+    })
+})
+
+app.get('/blogs/:id/edit', function(req,res){
+    let id = req.params.id;
+    blogdb.findById(id, function(err, result){
+        if(err){
+            console.error(err);
+        }
+        console.log(result);
+        res.render("edit", {
+            blog:result
+        })
+    })
+    
+})
+
+
+app.post('/blogs/:id/edit', (req,res)=>{
+    req.body.blog.body = req.sanitize(req.body.blog.body);        
+    let id = req.params.id;
+    blogdb.update({_id:id}, req.body.blog, function(err,suc){
+        if(err){
+            res.send(err);
+        }
+        res.redirect('/blogs');
+    })
+    });
+
 //listen port assign
 app.listen('8080', () => {
     console.log("Listening at port 8080");

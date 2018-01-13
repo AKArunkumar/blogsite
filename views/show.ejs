@@ -1,0 +1,32 @@
+<% include partials/header %>
+    <div class="grid-3">
+        <div class="ui raised segment">
+            <div class="field">
+                <p>
+                    <h2 class="title">
+                        <%= blog.title %>
+                    </h2>
+                    <img src="<%= blog.image %>" alt="">
+                    <p>
+                        <%= blog.created.toDateString() %>
+                    </p>
+                    <p class="title">
+                        <%= blog.body %>
+                    </p>
+                </p>
+            </div>
+        </div>
+        <a href="/blogs/<%= blog._id %>/edit" class="pos-1">
+            <button class="ui button ">
+                Edit
+            </button>
+        </a>
+        <a href="/blogs/<%= blog._id %>/delete" class="pos-2">
+            <div>
+                <button class="ui button">
+                    Delete
+                </button>
+            </div>
+        </a>
+    </div>
+    <% include partials/footer %>
