@@ -1,5 +1,5 @@
 
-                         -:Routes used:-
+                       ## -:Routes used:-
 ###############################################################################
     Index   /blog           get         blog list
     New     /blog/new       get         blogform
