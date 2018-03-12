@@ -4,3 +4,4 @@
 * Uses passport for Loacal Authentication.
 * We can Add, Delete, Edit and Comment on blog.
 * RESTFUL routing.
+* MongoDB is used for database
